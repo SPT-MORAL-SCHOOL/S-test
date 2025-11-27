@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โรงเรียนสตรีพัทลุง | Satri Phatthalung School</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles for Thai font and branding */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f8f8;
+            color: #1f2937; /* Dark Gray for main text */
+        }
+        .text-spt-blue { color: #0056b3; } /* School Blue */
+        .bg-spt-blue { background-color: #0056b3; }
+        .hover\:bg-spt-light-blue:hover { background-color: #0069d9; }
+        .border-spt-blue { border-color: #0056b3; }
+        .sticky-nav {
+            top: 0;
+            z-index: 50;
+        }
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #0056b3; border-radius: 4px; }
+        ::-webkit-scrollbar-track { background: #f0f0f0; }
+        .dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .dropdown-menu.active {
+            max-height: 500px; /* Large enough value to contain content */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header & Sticky Navigation -->
+    <header id="main-header" class="sticky-nav shadow-lg bg-white">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo and School Name -->
+                <div class="flex-shrink-0 flex items-center space-x-3 cursor-pointer" onclick="navigate('/')">
+                    <img class="h-10 w-10 rounded-full shadow-md" src="https://img5.pic.in.th/file/secure-sv1/IMG_0310f4b22b3a3a8d0946.jpeg" alt="Satri Phatthalung Logo" onerror="this.onerror=null;this.src='https://placehold.co/40x40/0056b3/ffffff?text=SP'">
+                    <span class="text-xl font-extrabold text-spt-blue hidden sm:block">โรงเรียนสตรีพัทลุง</span>
+                </div>
+
+                <!-- Desktop Navigation and Dropdowns -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#" onclick="navigate('/')" class="nav-item">หน้าหลัก</a>
+                    <a href="#" onclick="navigate('/about')" class="nav-item">เกี่ยวกับโรงเรียน</a>
+
+                    <!-- กลุ่มงาน Dropdown -->
+                    <div class="relative group">
+                        <button id="groups-dropdown-btn" onclick="toggleDropdown('groups')" class="nav-item flex items-center">
+                            กลุ่มงาน <svg class="w-3 h-3 ml-1 transition-transform transform group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="groups-dropdown-menu" class="dropdown-menu absolute right-0 mt-2 w-60 rounded-md shadow-xl bg-white ring-1 ring-black ring-opacity-5 origin-top-right z-50">
+                            <a href="#" onclick="navigate('/groups/กิจการนักเรียน')" class="dropdown-item">1. กลุ่มงานกิจการนักเรียน</a>
+                            <a href="#" onclick="navigate('/groups/บริหารทั่วไป')" class="dropdown-item">2. กลุ่มงานบริหารทั่วไป</a>
+                            <a href="#" onclick="navigate('/groups/วิชาการ')" class="dropdown-item">3. กลุ่มงานวิชาการ</a>
+                            <a href="#" onclick="navigate('/groups/บริหารงบประมาณ')" class="dropdown-item">4. กลุ่มงานบริหารงบประมาณ</a>
+                        </div>
+                    </div>
+
+                    <!-- กลุ่มสาระการเรียนรู้ Dropdown -->
+                    <div class="relative group">
+                        <button id="areas-dropdown-btn" onclick="toggleDropdown('areas')" class="nav-item flex items-center">
+                            กลุ่มสาระการเรียนรู้ <svg class="w-3 h-3 ml-1 transition-transform transform group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="areas-dropdown-menu" class="dropdown-menu absolute right-0 mt-2 w-72 rounded-md shadow-xl bg-white ring-1 ring-black ring-opacity-5 origin-top-right z-50">
+                            <a href="#" onclick="navigate('/areas/ภาษาไทย')" class="dropdown-item">1. ภาษาไทย</a>
+                            <a href="#" onclick="navigate('/areas/คณิตศาสตร์')" class="dropdown-item">2. คณิตศาสตร์</a>
+                            <a href="#" onclick="navigate('/areas/วิทยาศาสตร์และเทคโนโลยี')" class="dropdown-item">3. วิทยาศาสตร์และเทคโนโลยี</a>
+                            <a href="#" onclick="navigate('/areas/สังคมศึกษา')" class="dropdown-item">4. สังคมศึกษา ศาสนา และวัฒนธรรม</a>
+                            <a href="#" onclick="navigate('/areas/สุขศึกษาและพลศึกษา')" class="dropdown-item">5. สุขศึกษาและพลศึกษา</a>
+                            <a href="#" onclick="navigate('/areas/ภาษาต่างประเทศ')" class="dropdown-item">6. ภาษาต่างประเทศ</a>
+                            <a href="#" onclick="navigate('/areas/ศิลปะ')" class="dropdown-item">7. ศิลปะ</a>
+                            <a href="#" onclick="navigate('/areas/การงานอาชีพ')" class="dropdown-item">8. การงานอาชีพ</a>
+                            <a href="#" onclick="navigate('/areas/แนะแนว')" class="dropdown-item">9. งานแนะแนว</a>
+                        </div>
+                    </div>
+
+                    <!-- เอกสาร Dropdown -->
+                    <div class="relative group">
+                        <button id="docs-dropdown-btn" onclick="toggleDropdown('documents')" class="nav-item flex items-center">
+                            เอกสาร <svg class="w-3 h-3 ml-1 transition-transform transform group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="docs-dropdown-menu" class="dropdown-menu absolute right-0 mt-2 w-56 rounded-md shadow-xl bg-white ring-1 ring-black ring-opacity-5 origin-top-right z-50">
+                            <a href="#" onclick="navigate('/documents/ตารางเรียน-ตารางสอน')" class="dropdown-item">1. ตารางเรียน/ตารางสอน</a>
+                            <a href="#" onclick="navigate('/documents/รายชื่อนักเรียน')" class="dropdown-item">2. รายชื่อนักเรียน</a>
+                            <a href="#" onclick="navigate('/documents/ตารางสอบ')" class="dropdown-item">3. ตารางสอบ</a>
+                        </div>
+                    </div>
+
+                    <a href="#" onclick="navigate('/admissions')" class="nav-item">งานรับนักเรียน</a>
+                    <a href="#" onclick="navigate('/contact')" class="nav-item">ติดต่อ</a>
+                    
+                    <!-- Login Button -->
+                    <button onclick="navigate('/login')" class="ml-4 px-4 py-2 text-sm font-semibold rounded-full bg-spt-blue text-white hover:bg-spt-light-blue transition duration-150 shadow-md">
+                        เข้าสู่ระบบ
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-spt-blue hover:text-white hover:bg-spt-blue focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-spt-blue/5">
+                <a href="#" onclick="navigate('/')" class="mobile-nav-item">หน้าหลัก</a>
+                <a href="#" onclick="navigate('/about')" class="mobile-nav-item">เกี่ยวกับโรงเรียน</a>
+                
+                <!-- Mobile กลุ่มงาน Dropdown -->
+                <button onclick="toggleMobileDropdown('groups-mobile')" class="mobile-nav-item mobile-dropdown-btn">กลุ่มงาน</button>
+                <div id="groups-mobile-menu" class="dropdown-menu pl-4 text-sm bg-white/50 rounded-b-lg">
+                    <a href="#" onclick="navigate('/groups/กิจการนักเรียน')" class="mobile-dropdown-item">1. กลุ่มงานกิจการนักเรียน</a>
+                    <a href="#" onclick="navigate('/groups/บริหารทั่วไป')" class="mobile-dropdown-item">2. กลุ่มงานบริหารทั่วไป</a>
+                    <a href="#" onclick="navigate('/groups/วิชาการ')" class="mobile-dropdown-item">3. กลุ่มงานวิชาการ</a>
+                    <a href="#" onclick="navigate('/groups/บริหารงบประมาณ')" class="mobile-dropdown-item">4. กลุ่มงานบริหารงบประมาณ</a>
+                </div>
+
+                <!-- Mobile กลุ่มสาระการเรียนรู้ Dropdown -->
+                <button onclick="toggleMobileDropdown('areas-mobile')" class="mobile-nav-item mobile-dropdown-btn">กลุ่มสาระการเรียนรู้</button>
+                <div id="areas-mobile-menu" class="dropdown-menu pl-4 text-sm bg-white/50 rounded-b-lg">
+                    <a href="#" onclick="navigate('/areas/ภาษาไทย')" class="mobile-dropdown-item">1. ภาษาไทย</a>
+                    <a href="#" onclick="navigate('/areas/คณิตศาสตร์')" class="mobile-dropdown-item">2. คณิตศาสตร์</a>
+                    <a href="#" onclick="navigate('/areas/วิทยาศาสตร์และเทคโนโลยี')" class="mobile-dropdown-item">3. วิทยาศาสตร์และเทคโนโลยี</a>
+                    <a href="#" onclick="navigate('/areas/สังคมศึกษา')" class="mobile-dropdown-item">4. สังคมศึกษาฯ</a>
+                    <a href="#" onclick="navigate('/areas/สุขศึกษาและพลศึกษา')" class="mobile-dropdown-item">5. สุขศึกษาและพลศึกษา</a>
+                    <a href="#" onclick="navigate('/areas/ภาษาต่างประเทศ')" class="mobile-dropdown-item">6. ภาษาต่างประเทศ</a>
+                    <a href="#" onclick="navigate('/areas/ศิลปะ')" class="mobile-dropdown-item">7. ศิลปะ</a>
+                    <a href="#" onclick="navigate('/areas/การงานอาชีพ')" class="mobile-dropdown-item">8. การงานอาชีพ</a>
+                    <a href="#" onclick="navigate('/areas/แนะแนว')" class="mobile-dropdown-item">9. งานแนะแนว</a>
+                </div>
+
+                <!-- Mobile เอกสาร Dropdown -->
+                <button onclick="toggleMobileDropdown('documents-mobile')" class="mobile-nav-item mobile-dropdown-btn">เอกสาร</button>
+                <div id="documents-mobile-menu" class="dropdown-menu pl-4 text-sm bg-white/50 rounded-b-lg">
+                    <a href="#" onclick="navigate('/documents/ตารางเรียน-ตารางสอน')" class="mobile-dropdown-item">1. ตารางเรียน/ตารางสอน</a>
+                    <a href="#" onclick="navigate('/documents/รายชื่อนักเรียน')" class="mobile-dropdown-item">2. รายชื่อนักเรียน</a>
+                    <a href="#" onclick="navigate('/documents/ตารางสอบ')" class="mobile-dropdown-item">3. ตารางสอบ</a>
+                </div>
+
+                <a href="#" onclick="navigate('/admissions')" class="mobile-nav-item">งานรับนักเรียน</a>
+                <a href="#" onclick="navigate('/contact')" class="mobile-nav-item">ติดต่อ</a>
+                <a href="#" onclick="navigate('/login')" class="mobile-nav-item bg-spt-blue text-white hover:bg-spt-light-blue text-center">เข้าสู่ระบบ</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-container" class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+        <!-- Content will be rendered here by JavaScript -->
+        <div class="h-64 flex items-center justify-center text-xl text-gray-500">
+            กำลังโหลดเนื้อหา...
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-spt-blue text-white mt-auto pt-8 pb-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-white/20 pb-6 mb-6">
+                <!-- หน่วยงานที่เกี่ยวข้อง -->
+                <div>
+                    <h3 class="font-bold text-lg mb-3 border-b-2 border-white/50 inline-block">หน่วยงานที่เกี่ยวข้อง</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://www.moe.go.th/" target="_blank" class="hover:text-amber-300 transition duration-150">กระทรวงศึกษาธิการ</a></li>
+                        <li><a href="https://www.obec.go.th/" target="_blank" class="hover:text-amber-300 transition duration-150">สพฐ.</a></li>
+                        <li><a href="https://www.smpthl.go.th/" target="_blank" class="hover:text-amber-300 transition duration-150">สพม.พัทลุง</a></li>
+                        <li><a href="https://plg.moe.go.th/" target="_blank" class="hover:text-amber-300 transition duration-150">ศึกษาธิการจังหวัดพัทลุง</a></li>
+                    </ul>
+                </div>
+
+                <!-- ระบบงาน -->
+                <div>
+                    <h3 class="font-bold text-lg mb-3 border-b-2 border-white/50 inline-block">ระบบงาน</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://2b.spt.ac.th/" target="_blank" class="hover:text-amber-300 transition duration-150">2b.spt.ac.th</a></li>
+                        <li><a href="https://sgs.bopp-obec.info/" target="_blank" class="hover:text-amber-300 transition duration-150">SGS</a></li>
+                        <li><a href="https://apps.myschool.in.th/login" target="_blank" class="hover:text-amber-300 transition duration-150">MySchool Login</a></li>
+                        <li><a href="https://plg.mreschool.net/mainEschool/" target="_blank" class="hover:text-amber-300 transition duration-150">Eschool</a></li>
+                    </ul>
+                </div>
+
+                <!-- ติดต่อโรงเรียน -->
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="font-bold text-lg mb-3 border-b-2 border-white/50 inline-block">ติดต่อโรงเรียน</h3>
+                    <p class="text-sm">
+                        โรงเรียนสตรีพัทลุง<br>
+                        เลขที่ 250 ถ.ราเมศวร์ ต.คูหาสวรรค์<br>
+                        อ.เมืองพัทลุง จ.พัทลุง 93000
+                    </p>
+                    <div class="flex space-x-4 mt-3">
+                        <a href="https://www.facebook.com/spt.ac.th?" target="_blank" class="text-xl hover:text-amber-300 transition duration-150"><i class="fab fa-facebook-square"></i></a>
+                        <a href="https://www.facebook.com/photoavspt/" target="_blank" class="text-xl hover:text-amber-300 transition duration-150"><i class="fas fa-camera"></i></a>
+                        <a href="https://www.instagram.com/sptschool_official?igsh=MWM0NWl2MmF1cXhvdw==" target="_blank" class="text-xl hover:text-amber-300 transition duration-150"><i class="fab fa-instagram-square"></i></a>
+                        <a href="https://www.tiktok.com/@spt_school?_t=ZS-90tOrK4pFtH&_r=1" target="_blank" class="text-xl hover:text-amber-300 transition duration-150"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm py-3">
+                &copy; โรงเรียนสตรีพัทลุง | Satri Phatthalung School
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // ** Firebase Configuration and Setup **
+        // Global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app, db, auth;
+        let authReady = false;
+        let currentUserId = null;
+        let currentPath = window.location.hash.substring(1) || '/';
+        let activeDropdown = null; // State for desktop dropdowns
+
+        // Helper function for Base64 to ArrayBuffer (for file uploads mock)
+        function base64ToArrayBuffer(base64) {
+            const binary_string = window.atob(base64);
+            const len = binary_string.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binary_string.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        // Firebase Initialization Function
+        async function initializeFirebase() {
+            try {
+                // setLogLevel('debug'); // Uncomment for debugging
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Authentication Logic
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        currentUserId = user.uid;
+                        console.log("User authenticated:", currentUserId);
+                    } else {
+                        // Sign in anonymously if initial token is not available
+                        try {
+                            if (initialAuthToken) {
+                                await signInWithCustomToken(auth, initialAuthToken);
+                            } else {
+                                await signInAnonymously(auth);
+                            }
+                        } catch (error) {
+                            console.error("Authentication error:", error);
+                        }
+                    }
+                    authReady = true;
+                    // Re-render the current view after authentication is complete
+                    renderView(currentPath);
+                });
+            } catch (error) {
+                console.error("Failed to initialize Firebase:", error);
+                document.getElementById('app-container').innerHTML = `
+                    <div class="p-6 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-md mt-10">
+                        <h2 class="text-xl font-bold">เกิดข้อผิดพลาดในการเชื่อมต่อ Firebase</h2>
+                        <p>กรุณาตรวจสอบการตั้งค่า: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ** Navigation and State Management **
+
+        // Store active mobile dropdown (groups-mobile, areas-mobile, documents-mobile)
+        let activeMobileDropdown = null;
+
+        // Toggle mobile menu visibility
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Function to toggle desktop dropdowns (and collapse others)
+        window.toggleDropdown = (dropdownName) => {
+            const menu = document.getElementById(dropdownName + '-dropdown-menu');
+            const button = document.getElementById(dropdownName + '-dropdown-btn');
+
+            if (activeDropdown && activeDropdown !== dropdownName) {
+                // Collapse the previously active one
+                const prevMenu = document.getElementById(activeDropdown + '-dropdown-menu');
+                const prevButton = document.getElementById(activeDropdown + '-dropdown-btn');
+                prevMenu.classList.remove('active');
+                prevButton.classList.remove('active');
+            }
+
+            // Toggle the current one
+            if (activeDropdown === dropdownName) {
+                menu.classList.remove('active');
+                button.classList.remove('active');
+                activeDropdown = null;
+            } else {
+                menu.classList.add('active');
+                button.classList.add('active');
+                activeDropdown = dropdownName;
+            }
+        };
+
+        // Function to toggle mobile dropdowns (accordion behavior)
+        window.toggleMobileDropdown = (dropdownName) => {
+            const menu = document.getElementById(dropdownName + '-menu');
+            
+            if (activeMobileDropdown && activeMobileDropdown !== dropdownName) {
+                // Collapse the previously active one
+                const prevMenu = document.getElementById(activeMobileDropdown + '-menu');
+                prevMenu.classList.remove('active');
+            }
+
+            // Toggle the current one
+            if (activeMobileDropdown === dropdownName) {
+                menu.classList.remove('active');
+                activeMobileDropdown = null;
+            } else {
+                menu.classList.add('active');
+                activeMobileDropdown = dropdownName;
+            }
+        };
+
+        // SPA Navigation Function
+        window.navigate = (path) => {
+            const newPath = path.startsWith('/') ? path : '/' + path;
+            history.pushState(null, '', '#' + newPath);
+            currentPath = newPath;
+            // Close all dropdowns upon navigating
+            if (activeDropdown) toggleDropdown(activeDropdown);
+            if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden'); // Close mobile menu
+            renderView(currentPath);
+        };
+
+        window.onpopstate = () => {
+            currentPath = window.location.hash.substring(1) || '/';
+            renderView(currentPath);
+        };
+
+        // ** Core View Rendering Function **
+        window.renderView = (path) => {
+            const container = document.getElementById('app-container');
+            if (!authReady) {
+                container.innerHTML = `<div class="p-8 text-center text-xl font-semibold text-spt-blue/70">กำลังตรวจสอบสิทธิ์ผู้ใช้...</div>`;
+                return;
+            }
+
+            const pathSegments = path.split('/').filter(s => s.length > 0);
+            const mainRoute = pathSegments[0] || 'home';
+            const subRoute = pathSegments[1] || null;
+
+            if (mainRoute === 'home' || mainRoute === '/') {
+                container.innerHTML = renderHome();
+            } else if (mainRoute === 'about') {
+                container.innerHTML = renderAbout();
+            } else if (mainRoute === 'groups') {
+                if (subRoute) {
+                    renderGroupDetail(container, subRoute);
+                } else {
+                    container.innerHTML = renderGroupsIndex();
+                }
+            } else if (mainRoute === 'areas') {
+                if (subRoute) {
+                    renderAreaDetail(container, subRoute);
+                } else {
+                    container.innerHTML = renderAreasIndex();
+                }
+            } else if (mainRoute === 'documents') {
+                if (subRoute) {
+                    renderDocumentDetail(container, subRoute);
+                } else {
+                    container.innerHTML = renderDocumentsIndex();
+                }
+            } else if (mainRoute === 'admissions') {
+                renderAdmissions(container, subRoute);
+            } else if (mainRoute === 'contact') {
+                container.innerHTML = renderContact();
+            } else if (mainRoute === 'login') {
+                container.innerHTML = renderLogin();
+            } else {
+                container.innerHTML = renderNotFound();
+            }
+        };
+        
+        // ** Reusable Components and Data **
+
+        // Mock data for group/area heads and documents
+        const GroupData = {
+            'กิจการนักเรียน': { head: 'รองผู้อำนวยการ กิจการนักเรียน', img: 'https://placehold.co/150x150/0056b3/ffffff?text=รองฯ+กจ.' },
+            'บริหารทั่วไป': { head: 'รองผู้อำนวยการ บริหารทั่วไป', img: 'https://placehold.co/150x150/0056b3/ffffff?text=รองฯ+บท.' },
+            'วิชาการ': { head: 'รองผู้อำนวยการ วิชาการ', img: 'https://placehold.co/150x150/0056b3/ffffff?text=รองฯ+วช.' },
+            'บริหารงบประมาณ': { head: 'รองผู้อำนวยการ บริหารงบประมาณ', img: 'https://placehold.co/150x150/0056b3/ffffff?text=รองฯ+บง.' },
+        };
+        const AreaData = {
+            'ภาษาไทย': { head: 'หัวหน้ากลุ่มสาระ ภาษาไทย', img: 'https://placehold.co/150x150/8a2be2/ffffff?text=ครู+ภาษาไทย' },
+            'คณิตศาสตร์': { head: 'หัวหน้ากลุ่มสาระ คณิตศาสตร์', img: 'https://placehold.co/150x150/4682b4/ffffff?text=ครู+คณิต' },
+            'วิทยาศาสตร์และเทคโนโลยี': { head: 'หัวหน้ากลุ่มสาระ วิทย์ฯ', img: 'https://placehold.co/150x150/3cb371/ffffff?text=ครู+วิทย์' },
+            'สังคมศึกษา': { head: 'หัวหน้ากลุ่มสาระ สังคมศึกษาฯ', img: 'https://placehold.co/150x150/daa520/ffffff?text=ครู+สังคม' },
+            'สุขศึกษาและพลศึกษา': { head: 'หัวหน้ากลุ่มสาระ สุข-พลศึกษา', img: 'https://placehold.co/150x150/ff6347/ffffff?text=ครู+พลศึกษา' },
+            'ภาษาต่างประเทศ': { head: 'หัวหน้ากลุ่มสาระ ภาษาต่างประเทศ', img: 'https://placehold.co/150x150/1e90ff/ffffff?text=ครู+ภาษาตปท' },
+            'ศิลปะ': { head: 'หัวหน้ากลุ่มสาระ ศิลปะ', img: 'https://placehold.co/150x150/ffa500/ffffff?text=ครู+ศิลปะ' },
+            'การงานอาชีพ': { head: 'หัวหน้ากลุ่มสาระ การงานอาชีพ', img: 'https://placehold.co/150x150/9acd32/ffffff?text=ครู+การงาน' },
+            'แนะแนว': { head: 'หัวหน้างานแนะแนว', img: 'https://placehold.co/150x150/f08080/ffffff?text=ครู+แนะแนว' },
+        };
+        const DocumentTypes = [
+            'ตารางเรียน-ตารางสอน', 'รายชื่อนักเรียน', 'ตารางสอบ'
+        ];
+        const AdmissionsTypes = [
+            'ประกาศรับนักเรียน', 'ประกาศผลการคัดเลือก', 'ระบบรับสมัคร'
+        ];
+        
+        // Helper function for Firestore collection path
+        const getCollectionPath = (type, subRoute = '') => {
+            const base = `/artifacts/${appId}/public/data`;
+            if (type === 'groups') return `${base}/groups/${subRoute}/documents`;
+            if (type === 'areas') return `${base}/areas/${subRoute}/documents`;
+            if (type === 'documents') return `${base}/school_documents/${subRoute}/files`;
+            if (type === 'admissions') return `${base}/admissions/${subRoute}`;
+            return `${base}/misc`;
+        };
+
+        // ** CRUD Functionality (Admin Actions) **
+        
+        /**
+         * Renders the data list and the CRUD form for Admin
+         * @param {string} type - groups, areas, documents, admissions
+         * @param {string} subRoute - specific group/area/doc type
+         * @param {string} containerId - ID of the container element
+         */
+        const renderAdminCRUD = async (type, subRoute, containerId) => {
+            if (!db || !auth || !auth.currentUser) return;
+
+            const collectionPath = getCollectionPath(type, subRoute.replace(' ', '-').replace('/', '-'));
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // Simple check: if a user is logged in (not null, meaning auth is ready), show the admin interface.
+            const isAdmin = !!auth.currentUser;
+
+            let documents = [];
+            try {
+                const q = query(collection(db, collectionPath));
+                const querySnapshot = await getDocs(q);
+                documents = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                // Sort by timestamp desc for latest data first
+                documents.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+            } catch (e) {
+                console.error("Error fetching documents: ", e);
+                // Initialize collection if it doesn't exist (simulated by adding a fallback message)
+            }
+
+            const docListHTML = documents.length > 0
+                ? documents.map(doc => `
+                    <div class="p-3 border-b border-gray-100 flex justify-between items-center text-sm md:text-base">
+                        <div class="flex-grow">
+                            <h4 class="font-semibold text-spt-blue">${doc.title}</h4>
+                            <p class="text-xs text-gray-500">${doc.fileURL ? `<a href="${doc.fileURL}" target="_blank" class="text-blue-500 hover:text-blue-700">ดาวน์โหลดเอกสาร</a>` : doc.content || 'ไม่มีรายละเอียด'}</p>
+                            <p class="text-xs text-gray-400">ID: ${doc.id}</p>
+                        </div>
+                        ${isAdmin ? `
+                        <div class="flex space-x-2">
+                            <button onclick="editDocument('${collectionPath}', '${doc.id}')" class="text-yellow-600 hover:text-yellow-800 p-1"><i class="fas fa-edit"></i></button>
+                            <button onclick="deleteDocument('${collectionPath}', '${doc.id}')" class="text-red-600 hover:text-red-800 p-1"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                        ` : ''}
+                    </div>
+                `).join('')
+                : '<p class="text-center p-4 text-gray-500">ยังไม่มีเอกสารในส่วนนี้</p>';
+
+            const formHTML = isAdmin ? `
+                <div class="mt-8 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4 text-spt-blue">เพิ่ม/แก้ไขเอกสาร (${subRoute})</h3>
+                    <form id="admin-crud-form" onsubmit="handleFormSubmit(event, '${collectionPath}')">
+                        <input type="hidden" id="doc-id" value="">
+                        <div class="mb-4">
+                            <label for="doc-title" class="block text-sm font-medium text-gray-700">ชื่อเอกสาร/หัวข้อ</label>
+                            <input type="text" id="doc-title" required class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2 focus:border-spt-blue focus:ring focus:ring-spt-blue/50">
+                        </div>
+                        <div class="mb-4">
+                            <label for="doc-content" class="block text-sm font-medium text-gray-700">รายละเอียด</label>
+                            <textarea id="doc-content" rows="3" class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2 focus:border-spt-blue focus:ring focus:ring-spt-blue/50"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="doc-file-url" class="block text-sm font-medium text-gray-700">ลิงก์ไฟล์ (เช่น Google Drive, PDF URL)</label>
+                            <input type="url" id="doc-file-url" placeholder="https://..." class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2 focus:border-spt-blue focus:ring focus:ring-spt-blue/50">
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-spt-blue hover:bg-spt-light-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-spt-blue transition duration-150">
+                            เพิ่มข้อมูลใหม่
+                        </button>
+                    </form>
+                </div>
+            ` : '';
+
+            container.innerHTML = `
+                ${formHTML}
+                <div class="mt-10 p-6 bg-white rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-spt-blue">รายการเอกสาร/ข้อมูลที่เกี่ยวข้อง</h3>
+                    <div id="document-list">
+                        ${docListHTML}
+                    </div>
+                </div>
+            `;
+            
+            // Set up real-time listener
+            onSnapshot(collection(db, collectionPath), (snapshot) => {
+                const updatedDocs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                updatedDocs.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+                
+                const updatedListHTML = updatedDocs.length > 0
+                    ? updatedDocs.map(doc => `
+                        <div class="p-3 border-b border-gray-100 flex justify-between items-center text-sm md:text-base">
+                            <div class="flex-grow">
+                                <h4 class="font-semibold text-spt-blue">${doc.title}</h4>
+                                <p class="text-xs text-gray-500">${doc.fileURL ? `<a href="${doc.fileURL}" target="_blank" class="text-blue-500 hover:text-blue-700">ดาวน์โหลดเอกสาร</a>` : doc.content || 'ไม่มีรายละเอียด'}</p>
+                                <p class="text-xs text-gray-400">ID: ${doc.id}</p>
+                            </div>
+                            ${isAdmin ? `
+                            <div class="flex space-x-2">
+                                <button onclick="editDocument('${collectionPath}', '${doc.id}')" class="text-yellow-600 hover:text-yellow-800 p-1"><i class="fas fa-edit"></i></button>
+                                <button onclick="deleteDocument('${collectionPath}', '${doc.id}')" class="text-red-600 hover:text-red-800 p-1"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                            ` : ''}
+                        </div>
+                    `).join('')
+                    : '<p class="text-center p-4 text-gray-500">ยังไม่มีเอกสารในส่วนนี้</p>';
+
+                const docListElement = document.getElementById('document-list');
+                if (docListElement) {
+                    docListElement.innerHTML = updatedListHTML;
+                }
+            });
+
+        };
+
+        // Form submission handler
+        window.handleFormSubmit = async (event, collectionPath) => {
+            event.preventDefault();
+            const form = event.target;
+            const docId = form.elements['doc-id'].value;
+            const title = form.elements['doc-title'].value;
+            const content = form.elements['doc-content'].value;
+            const fileURL = form.elements['doc-file-url'].value;
+            
+            const data = {
+                title,
+                content: content || null,
+                fileURL: fileURL || null,
+                timestamp: new Date()
+            };
+
+            try {
+                if (docId) {
+                    // Update existing document
+                    await updateDoc(doc(db, collectionPath, docId), data);
+                    console.log("Document updated successfully:", docId);
+                } else {
+                    // Add new document
+                    await addDoc(collection(db, collectionPath), data);
+                    console.log("Document added successfully.");
+                }
+                
+                // Reset form
+                form.reset();
+                form.elements['doc-id'].value = '';
+                document.getElementById('submit-btn').textContent = 'เพิ่มข้อมูลใหม่';
+            } catch (e) {
+                console.error("Error saving document: ", e);
+                alert('บันทึกข้อมูลไม่สำเร็จ: ' + e.message);
+            }
+        };
+
+        // Edit document function
+        window.editDocument = async (collectionPath, docId) => {
+            try {
+                const docSnap = await getDoc(doc(db, collectionPath, docId));
+                if (docSnap.exists()) {
+                    const docData = docSnap.data();
+                    document.getElementById('doc-id').value = docId;
+                    document.getElementById('doc-title').value = docData.title || '';
+                    document.getElementById('doc-content').value = docData.content || '';
+                    document.getElementById('doc-file-url').value = docData.fileURL || '';
+                    document.getElementById('submit-btn').textContent = 'บันทึกการแก้ไข';
+                    // Scroll to form
+                    document.getElementById('admin-crud-form').scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (e) {
+                console.error("Error fetching document for edit: ", e);
+            }
+        };
+
+        // Delete document function
+        window.deleteDocument = async (collectionPath, docId) => {
+            const result = confirm('คุณต้องการลบเอกสารนี้หรือไม่?');
+            if (result) {
+                try {
+                    await deleteDoc(doc(db, collectionPath, docId));
+                    console.log("Document successfully deleted:", docId);
+                } catch (e) {
+                    console.error("Error deleting document: ", e);
+                    alert('ลบข้อมูลไม่สำเร็จ: ' + e.message);
+                }
+            }
+        };
+        
+        // ** View Rendering Functions (Page Content) **
+
+        const renderPageTitle = (title, subtitle) => `
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-spt-blue border-b-4 border-spt-blue/50 pb-2 inline-block">${title}</h1>
+                ${subtitle ? `<p class="text-lg text-gray-600 mt-2">${subtitle}</p>` : ''}
+            </div>
+        `;
+
+        function renderHome() {
+            return `
+                <div class="space-y-16">
+                    <!-- Section 1: Logo and School Name -->
+                    <section class="flex flex-col items-center justify-center p-8 bg-white rounded-2xl shadow-xl">
+                        <img class="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover shadow-lg border-4 border-white ring-4 ring-spt-blue/50" 
+                             src="https://img5.pic.in.th/file/secure-sv1/IMG_0310f4b22b3a3a8d0946.jpeg" 
+                             alt="Satri Phatthalung Logo" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/160x160/0056b3/ffffff?text=SP';">
+                        <h2 class="mt-6 text-3xl md:text-6xl font-black text-spt-blue tracking-wider">โรงเรียนสตรีพัทลุง</h2>
+                        <p class="text-xl md:text-2xl text-gray-700 mt-2 font-medium">Satri Phatthalung School</p>
+                        <p class="text-sm text-gray-500 mt-4">“ความรู้ คู่คุณธรรม นำการพัฒนา” | Knowledge, Morality, Leading Development</p>
+                    </section>
+
+                    <!-- Section 2: Poster/Carousel Placeholder -->
+                    <section class="p-4 bg-spt-blue/10 rounded-2xl shadow-xl">
+                        <h3 class="text-2xl font-bold text-spt-blue mb-4 border-l-4 border-spt-blue pl-3">ภาพโปสเตอร์/ประชาสัมพันธ์</h3>
+                        <div class="h-64 md:h-96 w-full bg-cover bg-center rounded-xl shadow-lg flex items-center justify-center text-white text-3xl font-bold" 
+                             style="background-image: url('https://placehold.co/1200x400/0056b3/ffffff?text=โปสเตอร์+ประชาสัมพันธ์+โรงเรียนสตรีพัทลุง'); background-size: cover;">
+                             ดอกตะแบกบานสะพรั่ง
+                        </div>
+                        <p class="text-right text-sm text-spt-blue/80 mt-2">ดอกไม้ประจำโรงเรียน: ดอกตะแบก</p>
+                    </section>
+                </div>
+            `;
+        }
+
+        function renderAbout() {
+            return `
+                <div class="flex flex-col items-center justify-center min-h-[50vh] p-8 bg-white rounded-2xl shadow-xl">
+                    ${renderPageTitle('เกี่ยวกับโรงเรียน', 'ประวัติความเป็นมาและข้อมูลทั่วไป')}
+                    <div class="p-8 bg-amber-50 border-l-4 border-amber-500 rounded-lg shadow-inner w-full max-w-2xl text-center">
+                        <i class="fas fa-tools text-5xl text-amber-500 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-amber-700">อยู่ระหว่างดำเนินการ</h2>
+                        <p class="text-lg text-amber-600 mt-2">ข้อมูลส่วนนี้กำลังอยู่ระหว่างการรวบรวมและจัดทำ</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGroupsIndex() {
+            return `
+                <div class="min-h-[50vh]">
+                    ${renderPageTitle('กลุ่มงาน', 'เลือกกลุ่มงานที่ต้องการ')}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${Object.keys(GroupData).map(group => `
+                            <div onclick="navigate('/groups/${group}')" 
+                                 class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-spt-blue/10 transition duration-300 cursor-pointer text-center border-t-4 border-spt-blue">
+                                <i class="fas fa-users-cog text-4xl text-spt-blue mb-3"></i>
+                                <h3 class="text-xl font-bold text-gray-800">${GroupData[group].head}</h3>
+                                <p class="text-lg font-semibold text-spt-blue">${group}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAreasIndex() {
+            return `
+                <div class="min-h-[50vh]">
+                    ${renderPageTitle('กลุ่มสาระการเรียนรู้', 'เลือกกลุ่มสาระการเรียนรู้ที่ต้องการ')}
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        ${Object.keys(AreaData).map(area => `
+                            <div onclick="navigate('/areas/${area}')" 
+                                 class="p-5 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-spt-blue/10 transition duration-300 cursor-pointer text-center border-b-4 border-spt-blue">
+                                <i class="fas fa-book-open text-3xl text-spt-blue mb-3"></i>
+                                <h3 class="text-md font-semibold text-gray-800">${area}</h3>
+                                <p class="text-sm text-gray-600">${AreaData[area].head}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDocumentsIndex() {
+            return `
+                <div class="min-h-[50vh]">
+                    ${renderPageTitle('เอกสารโรงเรียน', 'เลือกประเภทเอกสารที่ต้องการ')}
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        ${DocumentTypes.map(docType => `
+                            <div onclick="navigate('/documents/${docType}')" 
+                                 class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-spt-blue/10 transition duration-300 cursor-pointer text-center">
+                                <i class="fas fa-file-alt text-4xl text-spt-blue mb-3"></i>
+                                <h3 class="text-xl font-bold text-gray-800">${docType}</h3>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Group Detail Page
+        async function renderGroupDetail(container, groupName) {
+            const data = GroupData[groupName];
+            if (!data) return container.innerHTML = renderNotFound();
+            
+            container.innerHTML = `
+                <div class="min-h-[70vh]">
+                    ${renderPageTitle(`กลุ่มงาน${groupName}`, data.head)}
+                    
+                    <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-10 p-6 bg-white rounded-xl shadow-lg mb-10">
+                        <img class="w-40 h-40 object-cover rounded-full shadow-md border-4 border-spt-blue" src="${data.img}" alt="${data.head}">
+                        <div class="text-center md:text-left">
+                            <h2 class="text-2xl font-bold text-spt-blue">${data.head}</h2>
+                            <p class="text-lg text-gray-700 mt-1">กลุ่มงาน${groupName}</p>
+                            <p class="text-gray-500 mt-2">หน้าที่หลัก: ดูแลและบริหารจัดการด้าน${groupName}ของโรงเรียนเพื่อให้บรรลุวัตถุประสงค์ตามนโยบาย</p>
+                        </div>
+                    </div>
+
+                    <div id="crud-container-groups">
+                        <!-- CRUD UI will be rendered here -->
+                        <div class="p-8 text-center text-xl text-gray-500">กำลังโหลดเอกสาร...</div>
+                    </div>
+                </div>
+            `;
+            // Initial call to render the data list and CRUD form
+            renderAdminCRUD('groups', groupName, 'crud-container-groups');
+        }
+
+        // Render Learning Area Detail Page
+        async function renderAreaDetail(container, areaName) {
+            const data = AreaData[areaName];
+            if (!data) return container.innerHTML = renderNotFound();
+            
+            container.innerHTML = `
+                <div class="min-h-[70vh]">
+                    ${renderPageTitle(`กลุ่มสาระฯ ${areaName}`, data.head)}
+                    
+                    <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-10 p-6 bg-white rounded-xl shadow-lg mb-10">
+                        <img class="w-40 h-40 object-cover rounded-full shadow-md border-4 border-spt-blue" src="${data.img}" alt="${data.head}">
+                        <div class="text-center md:text-left flex-grow">
+                            <h2 class="text-2xl font-bold text-spt-blue">${data.head}</h2>
+                            <p class="text-lg text-gray-700 mt-1">กลุ่มสาระการเรียนรู้${areaName}</p>
+                            <p class="text-gray-500 mt-2">พันธกิจ: พัฒนาผู้เรียนให้มีความรู้และทักษะในสาขาวิชา${areaName}อย่างมีคุณภาพ</p>
+                            <button class="mt-4 px-6 py-2 bg-amber-500 text-white font-semibold rounded-full shadow-md hover:bg-amber-600 transition duration-150">
+                                <i class="fas fa-users mr-2"></i> คณะครูกลุ่มสาระฯ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="crud-container-areas">
+                        <!-- CRUD UI will be rendered here -->
+                        <div class="p-8 text-center text-xl text-gray-500">กำลังโหลดเอกสาร...</div>
+                    </div>
+                </div>
+            `;
+            renderAdminCRUD('areas', areaName, 'crud-container-areas');
+        }
+
+        // Render Document Detail Page
+        async function renderDocumentDetail(container, docType) {
+            const docKey = docType.replace('-', ' ');
+            if (!DocumentTypes.includes(docKey)) return container.innerHTML = renderNotFound();
+
+            container.innerHTML = `
+                <div class="min-h-[70vh]">
+                    ${renderPageTitle(docType, 'เอกสารสำคัญสำหรับนักเรียนและครู')}
+                    <div class="p-6 bg-white rounded-xl shadow-lg mb-10 text-center">
+                        <i class="fas fa-download text-5xl text-spt-blue mb-4"></i>
+                        <h2 class="text-2xl font-bold text-gray-800">จัดการเอกสาร: ${docType}</h2>
+                        <p class="text-gray-600">ในส่วนนี้ผู้ดูแลระบบสามารถเพิ่ม แก้ไข หรือลบไฟล์${docType}ได้</p>
+                    </div>
+
+                    <div id="crud-container-documents">
+                        <!-- CRUD UI will be rendered here -->
+                        <div class="p-8 text-center text-xl text-gray-500">กำลังโหลดเอกสาร...</div>
+                    </div>
+                </div>
+            `;
+            renderAdminCRUD('documents', docType, 'crud-container-documents');
+        }
+        
+        // Render Admissions Page
+        async function renderAdmissions(container, subRoute) {
+            if (!subRoute || !AdmissionsTypes.includes(subRoute)) {
+                // Admissions Index Page
+                container.innerHTML = `
+                    <div class="min-h-[50vh]">
+                        ${renderPageTitle('งานรับนักเรียน', 'ข้อมูลและประกาศสำคัญเกี่ยวกับการรับนักเรียน')}
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            ${AdmissionsTypes.map(admType => `
+                                <div onclick="navigate('/admissions/${admType}')" 
+                                    class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl hover:bg-spt-blue/10 transition duration-300 cursor-pointer text-center">
+                                    <i class="fas fa-user-check text-4xl text-spt-blue mb-3"></i>
+                                    <h3 class="text-xl font-bold text-gray-800">${admType}</h3>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Admissions Detail Page (with Normal/Special sections)
+            const admissionKey = subRoute.replace(' ', '-');
+            container.innerHTML = `
+                <div class="min-h-[70vh]">
+                    ${renderPageTitle(subRoute, 'แยกตามห้องเรียนปกติและห้องเรียนพิเศษ')}
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- ห้องเรียนปกติ (Normal Class) -->
+                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-8 border-green-500">
+                            <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center"><i class="fas fa-graduation-cap mr-2"></i> ห้องเรียนปกติ</h3>
+                            <div id="crud-container-admissions-normal-${admissionKey}">
+                                <div class="p-4 text-center text-gray-500">กำลังโหลดข้อมูล...</div>
+                            </div>
+                        </div>
+
+                        <!-- ห้องเรียนพิเศษ (Special Class) -->
+                        <div class="bg-white p-6 rounded-xl shadow-xl border-t-8 border-red-500">
+                            <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center"><i class="fas fa-rocket mr-2"></i> ห้องเรียนพิเศษ</h3>
+                            <div id="crud-container-admissions-special-${admissionKey}">
+                                <div class="p-4 text-center text-gray-500">กำลังโหลดข้อมูล...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            // Render CRUD for Normal
+            renderAdminCRUD('admissions', `${admissionKey}-ปกติ`, `crud-container-admissions-normal-${admissionKey}`);
+            // Render CRUD for Special
+            renderAdminCRUD('admissions', `${admissionKey}-พิเศษ`, `crud-container-admissions-special-${admissionKey}`);
+        }
+
+        function renderContact() {
+            return `
+                <div class="min-h-[70vh] flex flex-col items-center">
+                    ${renderPageTitle('ติดต่อโรงเรียน', 'ช่องทางออนไลน์และที่ตั้ง')}
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full max-w-4xl">
+                        
+                        <!-- Social Media -->
+                        <div class="p-8 bg-white rounded-xl shadow-xl border-l-4 border-spt-blue">
+                            <h3 class="text-2xl font-bold text-spt-blue mb-6">ช่องทางโซเชียลมีเดีย</h3>
+                            <div class="space-y-5">
+                                <a href="https://www.facebook.com/spt.ac.th?" target="_blank" class="flex items-center text-lg text-gray-700 hover:text-blue-600 transition duration-150">
+                                    <i class="fab fa-facebook-square text-3xl mr-4 w-6"></i> Facebook โรงเรียน
+                                </a>
+                                <a href="https://www.facebook.com/photoavspt/" target="_blank" class="flex items-center text-lg text-gray-700 hover:text-blue-600 transition duration-150">
+                                    <i class="fas fa-camera text-3xl mr-4 w-6"></i> Facebook ตากล้องสตรีพัทลุง
+                                </a>
+                                <a href="https://www.instagram.com/sptschool_official?igsh=MWM0NWl2MmF1cXhvdw==" target="_blank" class="flex items-center text-lg text-gray-700 hover:text-pink-600 transition duration-150">
+                                    <i class="fab fa-instagram-square text-3xl mr-4 w-6"></i> Instagram (sptschool_official)
+                                </a>
+                                <a href="https://www.tiktok.com/@spt_school?_t=ZS-90tOrK4pFtH&_r=1" target="_blank" class="flex items-center text-lg text-gray-700 hover:text-black transition duration-150">
+                                    <i class="fab fa-tiktok text-3xl mr-4 w-6"></i> TikTok (spt_school)
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Location & Info -->
+                        <div class="p-8 bg-white rounded-xl shadow-xl border-r-4 border-spt-blue">
+                            <h3 class="text-2xl font-bold text-spt-blue mb-6">ที่ตั้งและข้อมูลทั่วไป</h3>
+                            <div class="space-y-4 text-gray-700">
+                                <p class="flex items-start">
+                                    <i class="fas fa-map-marker-alt text-2xl text-red-500 mr-4 mt-1 flex-shrink-0"></i>
+                                    เลขที่ 250 ถนนราเมศวร์ ต.คูหาสวรรค์ อ.เมืองพัทลุง จ.พัทลุง 93000
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-phone text-2xl text-green-500 mr-4 mt-1 flex-shrink-0"></i>
+                                    โทรศัพท์: (เบอร์โทรศัพท์โรงเรียน)
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-envelope text-2xl text-yellow-500 mr-4 mt-1 flex-shrink-0"></i>
+                                    อีเมล: (อีเมลโรงเรียน)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLogin() {
+            const isLoggedIn = auth?.currentUser?.uid && !auth.currentUser.isAnonymous;
+            const uid = auth?.currentUser?.uid || 'N/A';
+            const isAnonymous = auth?.currentUser?.isAnonymous ? ' (ผู้ใช้แบบไม่ระบุตัวตน)' : '';
+
+            const authInfo = isLoggedIn 
+                ? `<div class="p-4 bg-green-100 text-green-700 rounded-lg"><i class="fas fa-check-circle mr-2"></i> คุณเข้าสู่ระบบเรียบร้อยแล้ว</div>`
+                : (authReady && !isLoggedIn)
+                    ? `<div class="p-4 bg-yellow-100 text-yellow-700 rounded-lg"><i class="fas fa-exclamation-triangle mr-2"></i> คุณกำลังใช้งานในโหมดไม่ระบุตัวตนหรือยังไม่ได้เข้าสู่ระบบ</div>`
+                    : `<div class="p-4 bg-gray-100 text-gray-700 rounded-lg"><i class="fas fa-spinner fa-spin mr-2"></i> กำลังตรวจสอบสถานะการเข้าสู่ระบบ...</div>`;
+
+            return `
+                <div class="min-h-[50vh] flex flex-col items-center">
+                    ${renderPageTitle('เข้าสู่ระบบ', 'สำหรับผู้ดูแลระบบและบุคลากร')}
+                    
+                    <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl border-t-8 border-spt-blue">
+                        
+                        ${authInfo}
+
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg text-sm break-all">
+                            <h4 class="font-bold text-spt-blue mb-2">สถานะผู้ใช้ปัจจุบัน (เพื่อตรวจสอบสิทธิ์ Admin)</h4>
+                            <p class="text-gray-600">User ID: <span class="font-mono text-xs">${uid}</span>${isAnonymous}</p>
+                            <p class="text-gray-600 mt-1">App ID: <span class="font-mono text-xs">${appId}</span></p>
+                        </div>
+                        
+                        <!-- Login/Logout Mock Form -->
+                        <div class="mt-6">
+                            ${isLoggedIn ? `
+                                <button onclick="logout()" class="w-full py-3 px-4 rounded-md shadow-md text-white font-semibold bg-red-600 hover:bg-red-700 transition duration-150">
+                                    ออกจากระบบ
+                                </button>
+                            ` : `
+                                <form onsubmit="mockLogin(event)" class="space-y-4">
+                                    <p class="text-sm text-gray-500 text-center">เนื่องจากเป็น Immersive Environment การเข้าสู่ระบบจะถูกจัดการผ่าน Custom Token โดยอัตโนมัติ<br>ปุ่มนี้สำหรับแสดงสถานะเท่านั้น</p>
+                                    <button type="submit" class="w-full py-3 px-4 rounded-md shadow-md text-white font-semibold bg-gray-500 cursor-not-allowed" disabled>
+                                        เข้าสู่ระบบด้วยรหัสผ่าน (ใช้งานไม่ได้ใน Immersive)
+                                    </button>
+                                </form>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Mock Login/Logout (Real login is handled by Custom Token)
+        window.mockLogin = (event) => {
+            event.preventDefault();
+            alert('ระบบเข้าสู่ระบบถูกจัดการโดย Canvas Environment โดยอัตโนมัติแล้ว');
+        };
+
+        window.logout = async () => {
+            try {
+                await signOut(auth);
+                alert('ออกจากระบบเรียบร้อยแล้ว กรุณารีเฟรชหน้าหากต้องการกลับไปใช้ Custom Token');
+                navigate('/login'); // Refresh the view
+            } catch (error) {
+                console.error("Logout failed:", error);
+                alert('ไม่สามารถออกจากระบบได้: ' + error.message);
+            }
+        };
+
+        function renderNotFound() {
+            return `
+                <div class="flex flex-col items-center justify-center min-h-[50vh] p-8 bg-white rounded-2xl shadow-xl">
+                    <i class="fas fa-exclamation-circle text-6xl text-red-500 mb-6"></i>
+                    <h1 class="text-4xl font-extrabold text-red-700">ไม่พบหน้านี้ (404)</h1>
+                    <p class="text-lg text-gray-600 mt-3">หน้าที่คุณค้นหาอาจถูกลบหรือย้ายไปแล้ว</p>
+                    <button onclick="navigate('/')" class="mt-6 px-6 py-3 bg-spt-blue text-white rounded-full shadow-lg hover:bg-spt-light-blue transition duration-150">
+                        กลับสู่หน้าหลัก
+                    </button>
+                </div>
+            `;
+        }
+
+        // Initialize everything on load
+        window.onload = () => {
+            initializeFirebase();
+        };
+
+    </script>
+    
+    <!-- Custom Style Definitions for Navigation -->
+    <script>
+        document.write('<style>');
+        document.write('.nav-item { display: block; padding: 0.5rem 1rem; font-weight: 600; color: #1f2937; border-radius: 0.5rem; transition: background-color 0.15s; }');
+        document.write('.nav-item:hover { background-color: #0056b3; color: white; }');
+        document.write('.dropdown-item { display: block; padding: 0.5rem 1rem; font-size: 0.875rem; color: #1f2937; transition: background-color 0.15s; white-space: nowrap; }');
+        document.write('.dropdown-item:hover { background-color: #0056b3; color: white; }');
+        document.write('.mobile-nav-item { display: block; width: 100%; padding: 0.75rem 1rem; font-weight: 500; color: #1f2937; border-radius: 0.5rem; transition: background-color 0.15s; text-align: left; }');
+        document.write('.mobile-nav-item:hover { background-color: #0056b3; color: white; }');
+        document.write('.mobile-dropdown-btn { color: #0056b3; font-weight: 600; }');
+        document.write('.mobile-dropdown-item { padding-left: 1.5rem; color: #374151; }');
+        document.write('</style>');
+    </script>
+</body>
+</html>
+
