@@ -236,8 +236,17 @@
         
         // ** Firebase Configuration and Setup **
         // Global variables provided by the Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const appId = typeof __app_id !== 'undefined' ? __app_id : '1:450436753681:web:13eb5458b57950099984b0';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : 'const firebaseConfig = {
+  apiKey: "AIzaSyBeh27zK1qUYP7tOU3MYNn_RobC8RaPZSM",
+  authDomain: "website-moral.firebaseapp.com",
+  projectId: "website-moral",
+  storageBucket: "website-moral.firebasestorage.app",
+  messagingSenderId: "450436753681",
+  appId: "1:450436753681:web:13eb5458b57950099984b0",
+  measurementId: "G-1GR9NTF8JB"
+};
+');
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         let app, db, auth;
